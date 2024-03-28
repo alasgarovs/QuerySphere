@@ -17,25 +17,21 @@ List of key features of Query Sphere
 - Downloading the executed query in excel format
 - Natively web-based for cross-device accessibility 
 
-### Usage 
-
-#### Installation
-To install Query Sphere, follow these steps.
-
-Clone the repository:
-```bash
-git clone https://github.com/alasgarovs/QuerySphere.git
-cd QuerySphere
+### How to Install?
+Clone the repository and Use virtualenv as:
+```console
+python3 -m venv .venv
+source .venv/bin/activate
 ```
 
 Install requirements:
-```bash
+```console
 pip install -r requirements.txt
 ```
 
 #### Database Initialization
 Before running the application, initialize the database:
-```bash
+```console
 flask db init
 flask db migrate -m 'add commit'
 flask db upgrade
@@ -44,16 +40,16 @@ flask db upgrade
 #### Create admin user for login
 Create admin user by running this command and the user will be created:
 - user: ```admin``` ; passwd: ```admin.0101```
-```bash
+```console
 python app/utils/create_admin.py
 ```
 
 #### Running the Application
 To run the application, execute the following command:
-```bash
+```console
 python run.py
 ```
-After running the application, you can log in with default credentials and manage users, create or run queries, etc.
+After running the application, you can log in with default credentials and manage users, create or run queries and etc.
 
 ### Contribution
 
