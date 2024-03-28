@@ -1,0 +1,108 @@
+:root {
+    --bg_color: #060c14;
+    --fg_color: #ffffff;
+}
+
+body {
+    background-color: var(--bg_color); 
+    color: var(--fg_color); 
+}
+
+.custom-bg-dark {
+    background-color:var(--bg_color); 
+    color: var(--fg_color); 
+}
+
+.bg_dark{
+    background-color: #00000027;
+}
+
+hr{
+ background-color: var(--fg_color);
+}
+
+.query-sphere{
+    text-align: center;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.query-sphere h1{
+    font-size: 5em; 
+    text-shadow: 2px 2px 4px rgba(0, 140, 255, 0.952); 
+}
+
+.button-container button{
+    width:80px;
+    margin-bottom:15px;
+    margin-right: 5px;
+    text-align: center;
+    float: left;
+}
+
+.add_user, .add_user a{
+    text-align: right;
+    margin-bottom:2px ;
+    text-decoration: none;
+}
+
+.danger-zone {
+    background-color: #f8d7da;
+    color: #721c24; 
+    padding: 10px; 
+    border: 1px solid #f5c6cb; 
+    border-radius: 5px; 
+}
+
+/* ################################################## */
+
+.table-container {
+    overflow-x: auto;
+}
+.table-container,
+.table_user  {
+    border-collapse: collapse;
+    width: 100%;
+}
+.table-container td,th,
+.table_user td,th {
+    text-align: left;
+}
+
+/* ############################################## */
+  
+@media (max-width: 500px) {
+    .table_user thead {
+    display: none;
+    }
+
+    .table_user,
+    .table_user tbody,
+    .table_user tr,
+    .table_user td {
+    display: block;
+    width: 100%;
+    }
+    .table_user tr{
+    border: 1px solid rgb(255, 255, 255);
+    }
+    .table_user tr {
+    margin-bottom: 15px;
+    }
+    .table_user td {
+    padding-left: 50%;
+    text-align: left;
+    position: relative;
+    }
+    .table_user td::before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    width: 50%;
+    padding-left: 15px;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    }
+}
+  

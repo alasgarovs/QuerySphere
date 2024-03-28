@@ -1,0 +1,10 @@
+flask
+Flask-SQLAlchemy
+Flask-WTF
+Flask-Bcrypt
+flask-login
+flask-migrate
+psycopg2-binary
+pyodbc
+pandas
+openpyxl

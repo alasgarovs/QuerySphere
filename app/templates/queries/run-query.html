@@ -1,0 +1,46 @@
+{% extends 'layout.html' %}
+
+{% block title %}{{ query.query_name }}{% endblock %}
+
+{% block body %}
+    <div class="card-title text-center">
+        <h5><b>{% if query %}Edit Query{% else %}Create Query{% endif %}</b></h5>
+        <h6>{{ query.query_description }}</h6>
+    </div>
+    <hr>
+    <form method="POST">
+        {% for variable in variable_list %}
+        <div class="form-group">
+            <label >{{ variable['Name'] }}</label>
+            <input type="text" class="form-control" id="{{ variable['Name'] }}" name="{{ variable['Name'] }}">
+        </div>
+        {% endfor %}
+        {% if token %}
+        <a href="/queries/export-query/{{query.query_name}}_{{token}}" class="btn btn-success">Export to Excel</a>
+        {% else %}
+        <button type="submit" class="btn btn-primary">Execute Query</button>
+        {% endif %}
+        <a href="/queries" class="btn btn-secondary">Cancel</a>
+    </form>
+    <br>
+    <div class="table-container">
+        <table class="table">
+            <thead class="bg_dark">
+                <tr>
+                    {% for column in columns %}
+                    <th>{{ column }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in query_result %}
+                <tr>
+                    {% for value in row %}
+                    <td>{{ value }}</td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock %}

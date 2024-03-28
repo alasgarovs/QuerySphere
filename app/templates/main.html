@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{% block title %}Query Sphere{% endblock %}
+
+{% block body %}
+<div>
+    <div class="query-sphere">
+        <h1 >Query Sphere</h1>
+        <h6>"Run Queries with a Click"</h6><hr><br>
+        {% if username %}
+        <a href="/queries" class="btn btn-primary">Get Queries</a>
+        {% else %}
+        {% endif %}
+    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            {% if username %}
+            {% else %}
+            <form method="POST" >
+                {{ form.csrf_token }}
+                <div class="form-group">
+                    {{ form.username.label(class="form-label") }}
+                    {{ form.username(class="form-control") }}
+                </div>
+                <div class="form-group">
+                    {{ form.password.label(class="form-label") }}
+                    {{ form.password(class="form-control") }}
+                </div>
+                <button type="submit" class="btn btn-primary">Login</button>
+            </form>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

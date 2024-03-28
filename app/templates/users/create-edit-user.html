@@ -1,0 +1,41 @@
+{% extends 'layout.html' %}
+
+{% block title %}{% if user %}Edit User{% else %}Create User{% endif %}{% endblock %}
+
+{% block body %}
+    <h5 class="card-title text-center"><b>{% if user %}Edit User{% else %}Create User{% endif %}</b></h5>
+    <hr>
+    <form method="POST">
+        {{ form.csrf_token }}
+        <div class="form-group">
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.firstname.label(class="form-label") }}
+            {{ form.firstname(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.lastname.label(class="form-label") }}
+            {{ form.lastname(class="form-control") }}
+        </div>
+        <div class="form-group">
+            {{ form.usermode.label(class="form-label") }}
+            {{ form.usermode(class="form-select") }}
+        </div>
+        <div class="form-group">
+            {{ form.password.label(class="form-label") }} 
+            {% if user %}
+                <br>
+                <b style="font-size:14px;">{{ form.check_password.label(class="form-label") }}</b>
+                {{ form.check_password }}
+            {% endif %}
+            {{ form.password(class="form-control") }}
+        </div>
+        <button type="submit" class="btn btn-primary">{% if user %}Update{% else %}Create{% endif %}</button>
+        {% if user %}
+            <a href="/users/user/{{ user.id }}/delete" class="btn btn-danger">Delete</a>
+        {% endif %}
+        <a href="/users" class="btn btn-secondary">Cancel</a>
+    </form>
+{% endblock %}
