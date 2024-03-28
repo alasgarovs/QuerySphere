@@ -1,17 +1,12 @@
 # Query Sphere
 
-Flask application. Run SQL queries with a click.
+Welcome to Query Sphere! A small [Flask](https://flask.palletsprojects.com/en/2.2.x/tutorial/) application. Run SQL queries with a click.
 
-- [About](#about-the-project)
-- [Features](#features)
-- [Usage](#usage)
-- [License](#license)
-
-## About the project
+### About the application
 
 Query Sphere application was created to analyze data without requiring knowledge of SQL code. Normally, companies need to write SQL queries to analyze data stored in databases. With this app you don't need to run SQL code over and over again when analyzing data. Users can easily run the queries they want in a graphical interface to analyze the data. This provides convenience to users and allows them to run queries dynamically in the graphical interface. The application being locally web-based means it can be accessed from various devices.
 
-## Features
+### Features
 
 List of key features of Query Sphere
 
@@ -22,7 +17,7 @@ List of key features of Query Sphere
 - Downloading the executed query in excel format
 - Natively web-based for cross-device accessibility 
 
-## Usage
+### Usage 
 
 #### Installation
 To install Query Sphere, follow these steps.
@@ -58,13 +53,12 @@ To run the application, execute the following command:
 ```bash
 python run.py
 ```
-After running the application, you can log in with default credentials, manage users, create or run queries, etc.
+After running the application, you can log in with default credentials and manage users, create or run queries, etc.
 
-## Contribution
+### Contribution
 
-Contributions welcome! Feel free to contribute, report issues, make your changes. I appreciate your help in improving Query Sphere!
+Contributions welcome! Feel free to contribute, report issues, make your changes. I appreciate your help in improving Query Sphere. Let's make this project even better together!
 
-
-## License
+### License
 
 This project is licensed under the [MIT License](LICENSE).
