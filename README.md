@@ -1,5 +1,8 @@
-# Query Sphere
+<p align="center">
+  <img src="https://github.com/alasgarovs/QuerySphere/assets/70092601/21f33b59-9df2-409f-9b4d-5123ef461877" alt="Alt Text">
+</p>
 
+***
 Welcome to Query Sphere! A small [Flask](https://flask.palletsprojects.com/en/2.2.x/tutorial/) application. Run SQL queries with a click.
 
 ### About the application
