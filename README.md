@@ -40,24 +40,21 @@ flask db migrate -m 'add commit'
 flask db upgrade
 ```
 
-#### Create admin user for login
-Create admin user by running this command and the user will be created:
-- user: ```admin``` ; passwd: ```admin.0101```
+#### Create superuser
+Create superuser by running this command:
 ```console
-python app/utils/create_admin.py
+python manage.py createsuperuser --username example_user --password example_password
 ```
 
 #### Running the Application
 To run the application, execute the following command:
 ```console
-python run.py
+python manage.py startserver
 ```
-After running the application, you can log in with default credentials and manage users, create or run queries and etc.
+After running the application, you can log in with your credentials and manage users, create or run queries and etc.
 
 ### Contribution
 
 Contributions welcome! Feel free to contribute, report issues, make your changes. I appreciate your help in improving Query Sphere. Let's make this project even better together!
 
-### License
-
-This project is licensed under the [MIT License](LICENSE).
+**Note:** This project is under intensive development, and updates may be frequent. Please check back regularly for new features and improvements
