@@ -18,6 +18,8 @@ app = Flask(__name__)
 app.secret_key = 'b00a77b0ec653f776b80d0ff78ead01a75ce1d32fbd09541d892cdb1b1d86474'
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///default.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+
+
 db.init_app(app)
 migrate = Migrate(app, db)
 
@@ -138,7 +140,7 @@ def logout():
     return redirect(url_for('queries.queries'))
 
 
-app.register_blueprint(users_bp)
+app.register_blueprint(users_bp, url_prefix='/users')
 app.register_blueprint(queries_bp)
 app.register_blueprint(db_settings_bp)
 

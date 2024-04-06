@@ -1,9 +1,10 @@
-from flask import Blueprint, render_template, redirect, url_for, flash, session, request
+from flask import Blueprint, render_template, redirect, url_for, flash, session, request, jsonify
 from app.users.forms import CreateUserForm, EditUserForm
 from app.users.models import db, Users
 from functools import wraps
 
 users_bp = Blueprint('users', __name__)
+
 
 
 # CHECK LOGIN
@@ -35,7 +36,7 @@ def admin_required(f):
 
 # USERS
 ####################################################
-@users_bp.route('/users')
+@users_bp.route('/', methods=['GET'])
 @login_required
 @admin_required
 def users():
@@ -44,42 +45,65 @@ def users():
     return render_template('users/users.html', username=username, users=all_users)
 
 
+# GET USER
+####################################################
+@users_bp.route('/user/<user_id>', methods=['GET'])
+@login_required
+@admin_required
+def get_user(user_id):
+    username = session.get('username')
+    form = EditUserForm()
+    if user_id != 'add_user':
+        user = Users.query.get_or_404(user_id)
+        form.username.data = user.username
+        form.firstname.data = user.firstname
+        form.lastname.data = user.lastname
+        form.usermode.data = user.usermode
+    else:
+        user=None
+    return render_template('users/create-edit-user.html', username=username, form=form, user=user)
+
+
 # ADD USER
 ####################################################
-@users_bp.route('/users/add-user', methods=['GET', 'POST'])
+@users_bp.route('/user/add_user', methods=['POST'])
 @login_required
 @admin_required
 def add_user():
     username = session.get('username')
     form = CreateUserForm()
 
-    if request.method == 'POST' and form.validate_on_submit():
-        new_user = Users()
-        new_user.username = form.username.data
-        new_user.firstname = form.firstname.data
-        new_user.lastname = form.lastname.data
-        new_user.usermode = form.usermode.data
-        new_user.set_password(form.password.data)
+    if form.validate_on_submit():
+        user = Users.query.filter_by(username=form.username.data).first()
+        if user:
+            flash("Username already exists", 'danger')
+        else:
+            new_user = Users()
+            new_user.username = form.username.data
+            new_user.firstname = form.firstname.data
+            new_user.lastname = form.lastname.data
+            new_user.usermode = form.usermode.data
+            new_user.set_password(form.password.data)
+            
+            db.session.add(new_user)
+            db.session.commit()
 
-        db.session.add(new_user)
-        db.session.commit()
-
-        flash(f"'{form.username.data}' user added successfully", 'success')
-        return redirect(url_for('users.users'))
-
+            flash(f"'{form.username.data}' user added successfully", 'success')
+            return redirect(url_for('users.users'))
+    
     return render_template('users/create-edit-user.html', username=username, form=form)
 
 
-# EDIT USER
+# UPDATE USER
 ####################################################
-@users_bp.route('/users/user/<int:user_id>', methods=['GET', 'POST'])
+@users_bp.route('/user/<int:user_id>', methods=['POST'])
 @login_required
 @admin_required
-def edit_user(user_id):
+def update_user(user_id):
     username = session.get('username')
     form = EditUserForm()
     user = Users.query.get_or_404(user_id)
-    if request.method == 'POST' and form.validate_on_submit():
+    if form.validate_on_submit():
         user.username = form.username.data
         user.firstname = form.firstname.data
         user.lastname = form.lastname.data
@@ -97,19 +121,13 @@ def edit_user(user_id):
 
         flash(f"'{form.username.data}' user updated successfully", 'success')
         return redirect(url_for('users.users'))
-    else:
-
-        form.username.data = user.username
-        form.firstname.data = user.firstname
-        form.lastname.data = user.lastname
-        form.usermode.data = user.usermode
-
-        return render_template('users/create-edit-user.html', username=username, form=form, user=user)
+    
+    return render_template('users/create-edit-user.html', username=username, form=form, user=user)
 
 
 # DELETE USER
 ####################################################
-@users_bp.route('/users/user/<int:user_id>/delete')
+@users_bp.route('/user/<user_id>', methods=['DELETE'])
 @login_required
 @admin_required
 def delete_user(user_id):
@@ -117,4 +135,4 @@ def delete_user(user_id):
     db.session.delete(user)
     db.session.commit()
     flash(f"'{user.username}' user deleted successfully", 'success')
-    return redirect(url_for('users.users'))
+    return '/users'

@@ -164,3 +164,17 @@ function collectTableValues() {
 
       return tableData;
     }
+
+
+
+function deleteUser(button) {
+    const userId = $(button).data('user-id');
+
+    $.ajax({
+        url: `/users/user/${userId}`,
+        type: 'DELETE',
+        success: function(url) {
+            window.location.href = url;
+        }
+    });
+}

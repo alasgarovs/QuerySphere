@@ -40,6 +40,11 @@ hr{
     float: left;
 }
 
+.side_buttons{
+    margin-right: 5px;
+    float: left;
+}
+
 .add_user, .add_user a{
     text-align: right;
     margin-bottom:2px ;

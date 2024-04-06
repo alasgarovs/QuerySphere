@@ -32,10 +32,10 @@
             {% endif %}
             {{ form.password(class="form-control") }}
         </div>
-        <button type="submit" class="btn btn-primary">{% if user %}Update{% else %}Create{% endif %}</button>
-        {% if user %}
-            <a href="/users/user/{{ user.id }}/delete" class="btn btn-danger">Delete</a>
-        {% endif %}
-        <a href="/users" class="btn btn-secondary">Cancel</a>
+        <button type="submit" class="btn btn-primary side_buttons">{% if user %}Update{% else %}Create{% endif %}</button>
     </form>
+    {% if user %}
+        <button type="submit" class="delete-btn btn btn-danger side_buttons" onclick="deleteUser(this)" data-user-id="{{ user.id }}">Delete</button>
+    {% endif %}
+    <a href="/users" class="btn btn-secondary">Cancel</a>
 {% endblock %}
