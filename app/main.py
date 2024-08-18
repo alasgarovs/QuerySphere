@@ -13,6 +13,7 @@ from app.db_settings.views import db_settings_bp
 import pandas as pd
 import secrets
 import string
+import os
 
 app = Flask(__name__)
 app.secret_key = 'b00a77b0ec653f776b80d0ff78ead01a75ce1d32fbd09541d892cdb1b1d86474'
@@ -45,8 +46,10 @@ def convert_timezone_unaware(df):
 @app.route('/queries/export-query/<file_name>', methods=['GET'])
 @login_required
 def export_query(file_name):
-    excel_file_path = f"exported_queries/{file_name}.xlsx"
-    return send_file(excel_file_path, as_attachment=True)
+    excel_file_path = os.path.join("exported_queries", f"{file_name}.xlsx")
+    absolute_path = os.path.abspath(excel_file_path)
+
+    return send_file(absolute_path, as_attachment=True)
 
 
 # RUN QUERY
