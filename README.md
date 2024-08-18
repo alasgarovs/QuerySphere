@@ -35,6 +35,7 @@ pip install -r requirements.txt
 #### Database Initialization
 Before running the application, initialize the database:
 ```console
+export FLASK_APP=manage.py
 flask db init
 flask db migrate -m 'add commit'
 flask db upgrade
